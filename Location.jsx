@@ -37,7 +37,6 @@ export default function LocationScreen() {
 
   return (
     <View style={styles.container}>
-      <Text>{text}</Text>
       <MapView
         provider={PROVIDER_GOOGLE}
         style={styles.map}
@@ -60,6 +59,6 @@ const styles = StyleSheet.create({
   },
   map: {
     width: "100%",
-    height: "50%",
+    height: "100%",
   },
 });
