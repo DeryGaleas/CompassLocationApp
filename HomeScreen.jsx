@@ -6,7 +6,7 @@ const Compass = () => {
   const [heading, setHeading] = useState(0);
 
   useEffect(() => {
-    Magnetometer.setUpdateInterval(1000); // Update every 1 second
+    Magnetometer.setUpdateInterval(200);
 
     const subscription = Magnetometer.addListener((data) => {
       const angle = calculateHeading(data.x, data.y);
