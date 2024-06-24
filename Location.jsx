@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import MapView, { PROVIDER_GOOGLE } from "react-native-maps";
+import MapView from "react-native-maps";
 import { Platform, Text, View, StyleSheet } from "react-native";
 import * as Location from "expo-location";
 
@@ -37,11 +37,7 @@ export default function LocationScreen() {
 
   return (
     <View style={styles.container}>
-      <MapView
-        provider={PROVIDER_GOOGLE}
-        style={styles.map}
-        region={coordinates}
-      ></MapView>
+      <MapView style={styles.map} region={coordinates}></MapView>
     </View>
   );
 }
