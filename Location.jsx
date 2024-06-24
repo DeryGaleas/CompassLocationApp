@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import MapView from "react-native-maps";
-import { Platform, Text, View, StyleSheet } from "react-native";
+import { Marker } from "react-native-maps";
+import { Text, View, StyleSheet } from "react-native";
 import * as Location from "expo-location";
 
 export default function LocationScreen() {
@@ -37,7 +38,9 @@ export default function LocationScreen() {
 
   return (
     <View style={styles.container}>
-      <MapView style={styles.map} region={coordinates}></MapView>
+      <MapView style={styles.map} region={coordinates}>
+        <Marker coordinate={coordinates} title="Christopher Urbina" />
+      </MapView>
     </View>
   );
 }
