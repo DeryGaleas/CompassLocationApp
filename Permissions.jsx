@@ -12,25 +12,12 @@ export default function Permissions() {
     navigation.navigate("Home");
   }, []);
 
-  /*
-  useEffect(() => {
-    // Only redirect on first render or permission change,
-    // not when users go back to this screen.
-    if (permission?.granted) {
-      console.log("Permissions Granted");
-      onContinue();
-    }
-  }, [permission?.granted]);
-*/
-
   if (permission?.granted) {
     return (
       <View>
         <View>
           <Text>Permissions granted</Text>
-          <Text>
-            To monitor your office marathon, we need access to your location.
-          </Text>
+          <Text>You are ready to continue with the app</Text>
         </View>
         <Button onPress={onContinue} title="Go Next Screen"></Button>
       </View>
@@ -44,7 +31,7 @@ export default function Permissions() {
         <Text>To get your location we need permission</Text>
       </View>
       {!permission ? (
-        <Text>Hey Spinner</Text>
+        <Text>Hey!</Text>
       ) : (
         <Button onPress={askPermission} title="Grant Permission"></Button>
       )}

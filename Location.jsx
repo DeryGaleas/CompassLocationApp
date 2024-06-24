@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import MapView from "react-native-maps";
 import { Marker } from "react-native-maps";
-import { Text, View, StyleSheet } from "react-native";
+import { View, StyleSheet } from "react-native";
 import * as Location from "expo-location";
 import { kelvinToCelsius } from "./utils";
 
@@ -34,13 +34,10 @@ export default function LocationScreen() {
       console.log(celsiusTemp);
       console.log("Tyoe of celsiusTemp", typeof celsiusTemp);
       setTemperature(`${celsiusTemp}° Celsius`);
-
-      //console.log(data);
     };
     fetchData();
   }, [location]);
 
-  let text = "Waiting..";
   let coordinates = {
     latitude: 0,
     longitude: 0,
