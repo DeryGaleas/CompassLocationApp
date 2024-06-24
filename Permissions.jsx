@@ -12,6 +12,14 @@ export default function Permissions() {
     navigation.navigate("Home");
   }, []);
 
+  useEffect(() => {
+    // Only redirect on first render or permission change,
+    // not when users go back to this screen.
+    if (permission?.granted) {
+      onContinue();
+    }
+  }, [permission?.granted]);
+
   if (permission?.granted) {
     return (
       <View>
