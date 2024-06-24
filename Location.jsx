@@ -3,8 +3,10 @@ import MapView from "react-native-maps";
 import { Marker } from "react-native-maps";
 import { Text, View, StyleSheet } from "react-native";
 import * as Location from "expo-location";
+import { kelvinToCelsius } from "./utils";
 
 export default function LocationScreen() {
+  const [temperature, setTemperature] = useState("");
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
 
@@ -17,9 +19,26 @@ export default function LocationScreen() {
       }
 
       let location = await Location.getCurrentPositionAsync({});
+
       setLocation(location);
     })();
   }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const url = `https://api.openweathermap.org/data/2.5/weather?lat=13.304220&lon=-87.179707&appid=a1bef899ca1f271cdf7fb2ebaf2513bb`;
+      const response = await fetch(url);
+      const data = await response.json();
+      const kelvinTemp = data.main.temp;
+      const celsiusTemp = kelvinToCelsius(kelvinTemp);
+      console.log(celsiusTemp);
+      console.log("Tyoe of celsiusTemp", typeof celsiusTemp);
+      setTemperature(`${celsiusTemp}° Celsius`);
+
+      //console.log(data);
+    };
+    fetchData();
+  }, [location]);
 
   let text = "Waiting..";
   let coordinates = {
@@ -32,6 +51,7 @@ export default function LocationScreen() {
     text = errorMsg;
   } else if (location) {
     text = JSON.stringify(location);
+
     coordinates.latitude = location.coords.latitude;
     coordinates.longitude = location.coords.longitude;
   }
@@ -39,7 +59,7 @@ export default function LocationScreen() {
   return (
     <View style={styles.container}>
       <MapView style={styles.map} region={coordinates}>
-        <Marker coordinate={coordinates} title="Christopher Urbina" />
+        <Marker coordinate={coordinates} title={temperature} />
       </MapView>
     </View>
   );
